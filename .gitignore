@@ -23,6 +23,7 @@ build/Release
 # Deployed apps should consider commenting this line out:
 # see https://npmjs.org/doc/faq.html#Should-I-check-my-node_modules-folder-into-git
 node_modules
-app/bower_componentsapp/.DS_Store
+app/bower_components
+app/.DS_Store
 build
 app/.DS_Store
