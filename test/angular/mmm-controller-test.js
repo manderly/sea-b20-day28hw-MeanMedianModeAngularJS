@@ -1,12 +1,13 @@
 'use strict';
 
+//question: can this be used to test the math logic?
 require('../../app/js/app.js'); //using browserify, so we can pull things in with require
 require('angular-mocks');
 
 describe('MMMController', function() {
   var $controllerConstructor;
   var $httpBackend;
-  var scope; //why no $ here? scope is just an object, no angular functionality
+  var scope;
 
   beforeEach(angular.mock.module('mmmApp')); //need this because browserify
 
@@ -21,5 +22,9 @@ describe('MMMController', function() {
     var notesController = $controllerConstructor('mmmController', {$scope: scope});
     expect(typeof notesController).toBe('object');
   });
+
+  it('should display input numbers', function() {
+    var
+  })
 
 });

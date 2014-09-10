@@ -1,10 +1,23 @@
 <div>
-<input type="text" data-ng-model="currentNums" placeholder="Input your numbers"/>
-</br>
-<button data-ng-click="calc()">Calculate!</button>
-</br>
-<div>Your numbers:</br>{{currentNums}}</div>
-  <div>
-  Mean: {{meanOutput}} Median: {{medianOutput}} and Mode: {{modeOutput}}
+  <div class="leftSide">
+  <h1>mean, median, and mode</h1>
+  <h2>...with AngularJS!</h2>
+  <p>Input your numbers as comma separated values and no spaces.</p>
+  <p>Example: 1,1999,5,5,18,0,16,404,16</p>
+  <input type="text" data-ng-model="currentNums" placeholder="Input your numbers"/>
+  </br>
+  <button data-ng-click="calc()">Calculate!</button>
+</div><!-- closes leftSide -->
+
+<div class="rightSide">
+  <div class="mmmResult">
+    </br>
+      <ul>
+        <li><h2>numbers</h2><div class="yournums">{{currentNums}}</div></li>
+        <li><h2>mean</h2><div class="output">{{meanOutput}}</div></li>
+        <li><h2>median</h2><div class="output">{{medianOutput}}</div></li>
+        <li><h2>mode</h2><div class="output">{{modeOutput}}</div></li>
+      </div><!-- closes output div-->
+    </div><!-- closes your numbers div-->
   </div>
 </div>

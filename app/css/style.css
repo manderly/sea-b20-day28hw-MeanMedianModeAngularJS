@@ -1,5 +1,5 @@
 html {
-  background-color:#FFFF7A;
+  background-color:#efefef;
   color:black;
   text-align:center;
   font-family:sans-serif;
@@ -54,7 +54,19 @@ button {
   height:360px;
 }
 
+.rightSide h2 {
+  line-height:10px;
+}
+
 .mmmResult ul li {
   display:inline;
   margin:0 20px;
+}
+
+.output {
+  line-height:0px;
+}
+
+.yournums {
+  line-height:0px;
 }
