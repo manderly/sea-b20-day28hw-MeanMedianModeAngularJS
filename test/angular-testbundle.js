@@ -7,6 +7,7 @@ require ("./../../bower_components/angular-route/angular-route.js");
 var mmmApp = angular.module('mmmApp', ['ngRoute']);
 require('./controllers/mmm-controller')(mmmApp);
 
+//Question: At least one route seems to be needed
 mmmApp.config(['$routeProvider', function($routeProvider) {
   $routeProvider
     .when('/', {
@@ -39,7 +40,7 @@ mmmApp.config(['$routeProvider', function($routeProvider) {
 module.exports = function(app) {
   app.controller('mmmController', function($scope, $http) {
 
-    $scope.calc = function() { //test
+    $scope.calc = function() {
       var currentNums = $scope.currentNums;
       $scope.mean(currentNums);
       $scope.median(currentNums);
@@ -25258,13 +25259,14 @@ var styleDirective = valueFn({
 },{}],6:[function(require,module,exports){
 'use strict';
 
+//question: can this be used to test the math logic?
 require('../../app/js/app.js'); //using browserify, so we can pull things in with require
 require("./../../bower_components/angular-mocks/angular-mocks.js");
 
-describe('MMMController', function() {
+describe('Mean Median Mode in Angular Controller Tests', function() {
   var $controllerConstructor;
   var $httpBackend;
-  var scope; //why no $ here? scope is just an object, no angular functionality
+  var scope;
 
   beforeEach(angular.mock.module('mmmApp')); //need this because browserify
 
@@ -25276,9 +25278,16 @@ describe('MMMController', function() {
   }));
 
   it('should be able to create a new controller', function() {
-    var notesController = $controllerConstructor('mmmController', {$scope: scope});
-    expect(typeof notesController).toBe('object');
+    var mmmController = $controllerConstructor('mmmController', {$scope: scope});
+    expect(typeof mmmController).toBe('object');
   });
+
+  //where to test math?
+  //test mean
+  //median in odd-numbered series
+  //median in even-numbered series
+  //mode in a set that has a mode
+  //NO MODE in set that has no mode
 
 });
 

@@ -6,6 +6,7 @@ require ('angular-route');
 var mmmApp = angular.module('mmmApp', ['ngRoute']);
 require('./controllers/mmm-controller')(mmmApp);
 
+//Question: At least one route seems to be needed
 mmmApp.config(['$routeProvider', function($routeProvider) {
   $routeProvider
     .when('/', {

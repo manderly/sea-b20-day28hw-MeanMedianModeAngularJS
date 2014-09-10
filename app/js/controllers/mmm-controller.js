@@ -3,7 +3,7 @@
 module.exports = function(app) {
   app.controller('mmmController', function($scope, $http) {
 
-    $scope.calc = function() { //test
+    $scope.calc = function() {
       var currentNums = $scope.currentNums;
       $scope.mean(currentNums);
       $scope.median(currentNums);
