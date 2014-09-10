@@ -1,0 +1,20 @@
+{
+  "name": "sea-b20-day28hw-MeanMedianModeAngularJS",
+  "version": "0.0.0",
+  "homepage": "https://github.com/MJGrant/sea-b20-day28hw-MeanMedianModeAngularJS",
+  "authors": [
+    "Mandi Grant <mandi018@gmail.com>"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "angular-mocks": "~1.2.24"
+  }
+}

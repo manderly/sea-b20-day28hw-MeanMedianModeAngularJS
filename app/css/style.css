@@ -1,0 +1,60 @@
+html {
+  background-color:#FFFF7A;
+  color:black;
+  text-align:center;
+  font-family:sans-serif;
+}
+
+ul {
+  margin:0;
+  padding:0;
+  list-style-type:none;
+}
+
+input {
+  height:30px;
+  width:250px;
+  font-size: 14px;
+  text-align:center;
+}
+
+button {
+  margin-top: 10px;
+  margin-right: 10px;
+  padding: 14px 26px;
+  font-size: 16px;
+  line-height: 100%;
+  color: #fff;
+  display:inline-block;
+  vertical-align: middle;
+  text-align: center;
+  cursor: pointer;
+  background-color:#003366;
+  border:none;
+}
+
+.title {
+  font-size:1.4em;
+  font-weight:bold;
+}
+
+.leftSide {
+  float:left;
+  width:40%;
+  margin-left:15%;
+  margin-right:5%;
+}
+
+.rightSide {
+  float:right;
+  width:20%;
+  background-color:white;
+  border-radius:18px;
+  margin-right:20%;
+  height:360px;
+}
+
+.mmmResult ul li {
+  display:inline;
+  margin:0 20px;
+}

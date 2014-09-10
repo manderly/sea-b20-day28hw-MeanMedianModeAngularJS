@@ -1,7 +1,10 @@
 <div>
-<input type="text" data-ng-model="calc">
+<input type="text" data-ng-model="currentNums" placeholder="Input your numbers"/>
+</br>
 <button data-ng-click="calc()">Calculate!</button>
+</br>
+<div>Your numbers:</br>{{currentNums}}</div>
   <div>
-  {{//mean median mode here}}
+  Mean: {{meanOutput}} Median: {{medianOutput}} and Mode: {{modeOutput}}
   </div>
 </div>
