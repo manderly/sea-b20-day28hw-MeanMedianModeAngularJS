@@ -9,4 +9,4 @@ Enter numbers as a comma separated list of values, ie:
 
 ``` 1,1999,5,5,18,0,16,404,16 ```
 
-![alt text](screenshots/mmmangular.png "Mean, Median, and Mode... with Backbone!")
+![alt text](screenshots/mmmangular.png "Mean, Median, and Mode... with Angular!")
