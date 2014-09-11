@@ -26,7 +26,7 @@ module.exports = function(grunt) {
     browserify: {
       dev: {
         options: {
-          transform: ['debowerify', 'hbsfy'],
+          transform: ['debowerify'],
           debug: true
         },
         src: ['app/js/**/*.js'],

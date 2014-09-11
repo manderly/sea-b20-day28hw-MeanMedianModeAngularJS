@@ -4,9 +4,13 @@
   <h2>...with AngularJS!</h2>
   <p>Input your numbers as comma separated values and no spaces.</p>
   <p>Example: 1,1999,5,5,18,0,16,404,16</p>
-  <input type="text" data-ng-model="currentNums" placeholder="Input your numbers"/>
-  </br>
-  <button data-ng-click="calc()">Calculate!</button>
+
+  <form name="numform">
+    <input type="text" required data-ng-model="currentNums" placeholder="Input your numbers"/>
+    </br>
+    <button data-ng-hide="numform.$invalid" data-ng-click="calc()">Calculate!</button>
+  </form>
+
 </div><!-- closes leftSide -->
 
 <div class="rightSide">
