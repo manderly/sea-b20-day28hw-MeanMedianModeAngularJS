@@ -11,7 +11,7 @@ module.exports = function(grunt) {
   grunt.initConfig({
     clean: {
       dev: {
-        src: ['build/']
+        src: 'build/'
       }
     },
     copy: {
@@ -55,10 +55,12 @@ module.exports = function(grunt) {
     },
 
     express: {
+      options: {
+        port: 3000
+      },
       dev: {
         options: {
-          options: 'server.js',
-          background: true
+          script: 'server.js'
         }
       }
     },
@@ -67,22 +69,23 @@ module.exports = function(grunt) {
       angulartest: {
         files: ['app/js/**/*.js', 'app/index.html', 'app/views/**/*.html'],
         tasks: ['browserify:angulartest'],
-        options:{
+        options: {
           spawn:false
         }
       },
       express: {
         files: ['app/js/**/*.js', 'app/css/*.css', 'app/views/**/*.html', 'server.js', 'models/*.js'],
-        tasks: ['buildtest', 'express:dev'],
+        tasks: ['test','build'],
         options: {
           spawn: false
         }
       }
     }
   });
-  grunt.registerTask('build:dev', ['clean:dev', 'browserify:dev', 'copy:dev']);
-  grunt.registerTask('angulartest', ['browserify:angulartest','karma:unit']);
-  grunt.registerTask('test', ['angulartest', 'simplemocha']);
-  grunt.registerTask('buildtest',['test','build:dev']);
-  grunt.registerTask('default', ['buildtest', 'watch:express']);
+
+  grunt.registerTask('build',['clean:dev','browserify:dev', 'copy:dev']);
+  grunt.registerTask('test', ['browserify:angulartest','karma:unit', 'simplemocha']);
+  grunt.registerTask('serve', ['express:dev','watch:express']);
+  grunt.registerTask('default',['test','build','serve']);
+
 };

@@ -20,6 +20,7 @@ describe('Mean Median Mode in Angular Controller Tests', function() {
     expect(typeof mmmController).toBe('object');
   });
 
+
   //more tests needed:
   //test mean
   //median in odd-numbered series

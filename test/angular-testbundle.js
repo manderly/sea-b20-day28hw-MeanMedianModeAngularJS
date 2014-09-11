@@ -5,7 +5,12 @@ require ("./../../bower_components/angular/angular");
 require ('angular-route');
 
 var mmmApp = angular.module('mmmApp', ['ngRoute']);
+
+//controllers
 require('./controllers/mmm-controller')(mmmApp);
+
+//services
+require('./services/math-service')(mmmApp);
 
 mmmApp.config(['$routeProvider', function($routeProvider) {
   $routeProvider
@@ -19,110 +24,125 @@ mmmApp.config(['$routeProvider', function($routeProvider) {
 }]);
 
 
-},{"./../../bower_components/angular/angular":4,"./controllers/mmm-controller":2,"angular-route":5}],2:[function(require,module,exports){
+},{"./../../bower_components/angular/angular":5,"./controllers/mmm-controller":2,"./services/math-service":3,"angular-route":6}],2:[function(require,module,exports){
 'use strict';
 
 module.exports = function(app) {
-  app.controller('mmmController', function($scope, $http) {
+  app.controller('mmmController', function($scope, mathService) {
 
-    $scope.calc = function() {
-      var currentNums = $scope.currentNums;
-      $scope.mean(currentNums);
-      $scope.median(currentNums);
-      $scope.mode(currentNums);
+    $scope.processNums = function(nums) {
+      mathService.getMean(nums);
+      mathService.getMedian(nums);
+      mathService.getMode(nums);
+
+      //from button, call 3 separate things from here
     };
-
-    $scope.csvToArray = function(numsWithCommas) {
-      var array = numsWithCommas.split(',');
-      return array;
-    };
-
-    $scope.sortByAscending = function(nums) {
-      //sorting the array - the function(a,b) trick ensures 19999 doesn't come before 2
-      //thanks http://www.sitepoint.com/javascript-array-sorting/ for the help
-      var sortedArray = nums.sort(function(a,b) {
-        return a - b;
-      });
-      return sortedArray;
-    };
-
-    $scope.sum = function(nums) {
-      var sum = 0;
-      for (var i = 0; i < nums.length; i ++) {
-        sum += Number(nums[i]);
-      }
-      return sum;
-    };
-
-    //*** MEAN *** Sum the numbers and divide by the quantity of numbers
-    $scope.mean = function(csvNums) {
-      var numArray = $scope.csvToArray(csvNums); //convert to array
-      var sumNums = $scope.sum(numArray); //sum the numbers
-      var mean = Math.floor(sumNums / (numArray.length)); //round off the long decimal
-      console.log("mmm-math mean is " + mean);
-      $scope.meanOutput = mean;
-    };
-
-
-    //*** MEDIAN *** Sort into ascending order and return the number in the middle
-    $scope.median = function(csvNums) {
-      var numArray = $scope.csvToArray(csvNums); //convert to array
-      var sortedArray = $scope.sortByAscending(numArray);
-
-      var length = sortedArray.length;
-      var midpoint = length / 2;
-
-      if (length % 2 !== 0) { //when it's an oddly numbered array, floor the result
-        midpoint = Math.floor(midpoint);
-      } else {
-        midpoint = midpoint - 1;
-      }
-      var median = Number(sortedArray[midpoint]);
-      console.log("The index of the midpoint is " + midpoint);
-      console.log("The sorted array value at that index is " + Number(sortedArray[midpoint]));
-      console.log("mmm-median is " + median);
-      $scope.medianOutput = median;
-    },
-
-
-    //*** MODE *** The most frequently occurring number in the set, if there is one.
-    $scope.mode = function(csvNums) {
-      var numArray = $scope.csvToArray(csvNums); //convert to array
-      var num = 0;
-      var modeMap = {};
-      var mostFrequentNum;
-      var numOccurrences = 0;
-      var mode = 0;
-      //loop through the numbers array and build a map
-      //the key is the number itself
-      //the value is how many times that number is found in the array
-      for (var i = 0; i < numArray.length; i ++) {
-        num = numArray[i];
-        if (modeMap[num] == null) {
-          modeMap[num] = 1;
-        } else {
-          modeMap[num]++;
-          if (modeMap[num] > numOccurrences) {
-            mode = num;
-            numOccurrences = modeMap[num];
-          }
-        }
-      }
-
-      mode = Number(mode);
-
-      if (mode == 0) {
-        mode = "NO MODE";
-      }
-
-      console.log("mmm-mode is " + mode);
-      $scope.modeOutput = mode;
-    };
-
   });
 };
 
 },{}],3:[function(require,module,exports){
+'use strict'
+
+module.exports = function(app) {
+  app.factory('mathService', function($http) {
+
+    //can make a service that parses the string to only be numbers
+    //can write a validation for that
+
+    var mathObj = {
+      //helpers
+      csvToArray: function(numsWithCommas) {
+        var array = numsWithCommas.split(',');
+        return array;
+      },
+
+      sortByAscending: function(nums) {
+        //sorting the array - the function(a,b) trick ensures 19999 doesn't come before 2
+        //thanks http://www.sitepoint.com/javascript-array-sorting/ for the help
+        var sortedArray = nums.sort(function(a,b) {
+          return a - b;
+        });
+        return sortedArray;
+      },
+
+      sum: function(nums) {
+        var sum = 0;
+        for (var i = 0; i < nums.length; i ++) {
+          sum += Number(nums[i]);
+        }
+        return sum;
+      },
+
+      //*** MEAN *** Sum the numbers and divide by the quantity of numbers
+      getMean: function(csvNums) {
+        var numArray = this.csvToArray(csvNums);
+        var sumNums = this.sum(numArray); //sum the numbers
+        var mean = Math.floor(sumNums / (numArray.length)); //round off the long decimal
+        console.log("mmm-math mean is " + mean);
+        return mean;
+      },
+
+
+      //*** MEDIAN *** Sort into ascending order and return the number in the middle
+      getMedian: function(csvNums) {
+        var numArray = this.csvToArray(csvNums); //convert to array
+        var sortedArray = this.sortByAscending(numArray);
+
+        var length = sortedArray.length;
+        var midpoint = length / 2;
+
+        if (length % 2 !== 0) { //when it's an oddly numbered array, floor the result
+          midpoint = Math.floor(midpoint);
+        } else {
+          midpoint = midpoint - 1;
+        }
+        var median = Number(sortedArray[midpoint]);
+        console.log("The index of the midpoint is " + midpoint);
+        console.log("The sorted array value at that index is " + Number(sortedArray[midpoint]));
+        console.log("mmm-median is " + median);
+        return median;
+      },
+
+      //*** MODE *** The most frequently occurring number in the set, if there is one.
+      getMode: function(csvNums) {
+        var numArray = this.csvToArray(csvNums); //convert to array
+        var num = 0;
+        var modeMap = {};
+        var mostFrequentNum;
+        var numOccurrences = 0;
+        var mode = 0;
+        //loop through the numbers array and build a map
+        //the key is the number itself
+        //the value is how many times that number is found in the array
+        for (var i = 0; i < numArray.length; i ++) {
+          num = numArray[i];
+          if (modeMap[num] == null) {
+            modeMap[num] = 1;
+          } else {
+            modeMap[num]++;
+            if (modeMap[num] > numOccurrences) {
+              mode = num;
+              numOccurrences = modeMap[num];
+            }
+          }
+        }
+
+        mode = Number(mode);
+          if (mode == 0) {
+            mode = "NO MODE";
+          }
+        console.log("mmm-mode is " + mode);
+
+        return mode;
+      }, //end mode function
+    }; // end math object
+
+    return math;
+
+  });
+};
+
+},{}],4:[function(require,module,exports){
 /**
  * @license AngularJS v1.2.24
  * (c) 2010-2014 Google, Inc. http://angularjs.org
@@ -2301,7 +2321,7 @@ if(window.jasmine || window.mocha) {
 
 })(window, window.angular);
 
-},{}],4:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 /**
  * @license AngularJS v1.2.24
  * (c) 2010-2014 Google, Inc. http://angularjs.org
@@ -24314,7 +24334,7 @@ var styleDirective = valueFn({
 })(window, document);
 
 !window.angular.$$csp() && window.angular.element(document).find('head').prepend('<style type="text/css">@charset "UTF-8";[ng\\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide{display:none !important;}ng\\:form{display:block;}.ng-animate-block-transitions{transition:0s all!important;-webkit-transition:0s all!important;}.ng-hide-add-active,.ng-hide-remove{display:block!important;}</style>');
-},{}],5:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 /**
  * @license AngularJS v1.2.17-build.163+sha.fafcd62
  * (c) 2010-2014 Google, Inc. http://angularjs.org
@@ -25243,7 +25263,7 @@ function ngViewFillContentFactory($compile, $controller, $route) {
 
 })(window, window.angular);
 
-},{}],6:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 'use strict';
 
 require('../../app/js/app.js');
@@ -25266,6 +25286,7 @@ describe('Mean Median Mode in Angular Controller Tests', function() {
     expect(typeof mmmController).toBe('object');
   });
 
+
   //more tests needed:
   //test mean
   //median in odd-numbered series
@@ -25275,4 +25296,4 @@ describe('Mean Median Mode in Angular Controller Tests', function() {
 
 });
 
-},{"../../app/js/app.js":1,"./../../bower_components/angular-mocks/angular-mocks.js":3}]},{},[6]);
+},{"../../app/js/app.js":1,"./../../bower_components/angular-mocks/angular-mocks.js":4}]},{},[7]);
