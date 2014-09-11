@@ -1,7 +1,7 @@
 sea-b20-day28hw-MeanMedianModeAngularJS
 =======================================
 
-[![Build Status](https://travis-ci.org/MJGrant/sea-b20-day28hw-MeanMedianModeAngularJS.svg?branch=master)](https://travis-ci.org/MJGrant/https://travis-ci.org/MJGrant/sea-b20-day28hw-MeanMedianModeAngularJS)
+[![Build Status](https://travis-ci.org/MJGrant/sea-b20-day28hw-MeanMedianModeAngularJS.svg?branch=workingbranch)](https://travis-ci.org/MJGrant/https://travis-ci.org/MJGrant/sea-b20-day28hw-MeanMedianModeAngularJS)
 
 Mean Median Mode in AngularJS
 
