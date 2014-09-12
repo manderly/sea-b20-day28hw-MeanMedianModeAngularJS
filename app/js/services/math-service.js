@@ -94,7 +94,6 @@ module.exports = function(app) {
       }, //end mode function
     }; // end math object
 
-    return math;
-
+    return mathObj;
   });
 };
