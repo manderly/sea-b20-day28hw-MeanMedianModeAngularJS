@@ -44,8 +44,7 @@ module.exports = function(app) {
 module.exports = function(app) {
   app.factory('mathService', function($http) {
 
-    //can make a service that parses the string to only be numbers
-    //can write a validation for that
+    //todo: make a service that parses the string to only be numbers
 
     var mathObj = {
       //helpers
