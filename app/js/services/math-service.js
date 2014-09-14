@@ -1,7 +1,7 @@
 'use strict'
 
 module.exports = function(app) {
-  app.factory('mathService', function($http) {
+  app.factory('mathService', function($http) { //fixme: what is $http for here?
 
     //todo: make a service that parses the string to only be numbers
 

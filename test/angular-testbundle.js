@@ -42,7 +42,7 @@ module.exports = function(app) {
 'use strict'
 
 module.exports = function(app) {
-  app.factory('mathService', function($http) {
+  app.factory('mathService', function($http) { //fixme: what is $http for here?
 
     //todo: make a service that parses the string to only be numbers
 
@@ -25282,6 +25282,26 @@ describe('Mean Median Mode in Angular Controller Tests', function() {
     expect(typeof mmmController).toBe('object');
   });
 
+});
+
+},{"../../app/js/app.js":1,"./../../bower_components/angular-mocks/angular-mocks.js":4}],8:[function(require,module,exports){
+'use strict';
+
+require('../../app/js/app.js');
+require("./../../bower_components/angular-mocks/angular-mocks.js");
+
+describe('Mean Median Mode service', function() {
+
+  beforeEach(angular.mock.module('mmmApp'));
+
+
+  it('should find the average', inject(function(mathService) {
+    expect(mathService.getMean("1,2,3")).toBe(2);
+  }));
+
+});
+
+
 
   //more tests needed:
   //test mean
@@ -25290,6 +25310,4 @@ describe('Mean Median Mode in Angular Controller Tests', function() {
   //mode in a set that has a mode
   //NO MODE in set that has no mode
 
-});
-
-},{"../../app/js/app.js":1,"./../../bower_components/angular-mocks/angular-mocks.js":4}]},{},[7]);
+},{"../../app/js/app.js":1,"./../../bower_components/angular-mocks/angular-mocks.js":4}]},{},[7,8]);
