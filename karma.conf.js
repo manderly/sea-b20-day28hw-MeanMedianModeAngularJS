@@ -1,7 +1,8 @@
 // Karma configuration
 // Generated on Tue Sep 09 2014 13:58:27 GMT-0700 (PDT)
 
-var browsers = ['Chrome', 'PhantomJS','Firefox'];
+var browsers = ['PhantomJS'];
+//var browsers = ['Chrome', 'PhantomJS','Firefox'];
   if ( /^win/.test(process.platform) ) {
     browsers.push('IE');
   }
