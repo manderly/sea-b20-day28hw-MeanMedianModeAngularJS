@@ -5,16 +5,17 @@ require ('angular-route');
 
 var mmmApp = angular.module('mmmApp', ['ngRoute']);
 
-//controllers
-require('./controllers/mmm-controller')(mmmApp);
-
 //services
 require('./services/math-service')(mmmApp);
+
+//directives
+require('./directives/mmm-directive')(mmmApp);
+
 
 mmmApp.config(['$routeProvider', function($routeProvider) {
   $routeProvider
     .when('/', {
-      templateUrl: 'views/mmm-view.html',
+      templateUrl: 'index.html',
       controller: 'mmmController'
     })
     .otherwise({

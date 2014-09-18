@@ -6,16 +6,17 @@ require ('angular-route');
 
 var mmmApp = angular.module('mmmApp', ['ngRoute']);
 
-//controllers
-require('./controllers/mmm-controller')(mmmApp);
-
 //services
 require('./services/math-service')(mmmApp);
+
+//directives
+require('./directives/mmm-directive')(mmmApp);
+
 
 mmmApp.config(['$routeProvider', function($routeProvider) {
   $routeProvider
     .when('/', {
-      templateUrl: 'views/mmm-view.html',
+      templateUrl: 'index.html',
       controller: 'mmmController'
     })
     .otherwise({
@@ -24,17 +25,26 @@ mmmApp.config(['$routeProvider', function($routeProvider) {
 }]);
 
 
-},{"./../../bower_components/angular/angular":5,"./controllers/mmm-controller":2,"./services/math-service":3,"angular-route":6}],2:[function(require,module,exports){
+},{"./../../bower_components/angular/angular":5,"./directives/mmm-directive":2,"./services/math-service":3,"angular-route":6}],2:[function(require,module,exports){
 'use strict';
 
 module.exports = function(app) {
-  app.controller('mmmController', function($scope, mathService) {
-
-    $scope.processNums = function(nums) {
-      $scope.meanResult = mathService.getMean(nums);
-      $scope.medianResult = mathService.getMedian(nums);
-      $scope.modeResult = mathService.getMode(nums);
+  app.directive('mmmDir', function() {
+    var mmmView = {
+      restrict: 'EAC', //EAC is common choice here
+      templateUrl: 'views/mmm-view.html',
+      scope: {
+      },
+      controller: function($scope, mathService) {
+        //this directive now holds the controller, which was formerly contained in mmm-controller.js
+        $scope.processNums = function(nums) {
+          $scope.meanResult = mathService.getMean(nums);
+          $scope.medianResult = mathService.getMedian(nums);
+          $scope.modeResult = mathService.getMode(nums);
+        };
+      }
     };
+    return mmmView;
   });
 };
 
@@ -25265,31 +25275,6 @@ function ngViewFillContentFactory($compile, $controller, $route) {
 require('../../app/js/app.js');
 require("./../../bower_components/angular-mocks/angular-mocks.js");
 
-describe('Mean Median Mode in Angular Controller Tests', function() {
-  var $controllerConstructor;
-  var $httpBackend;
-  var scope;
-
-  beforeEach(angular.mock.module('mmmApp')); //need this because browserify
-
-  beforeEach(angular.mock.inject(function($controller, $rootScope) {
-    scope = $rootScope.$new();
-    $controllerConstructor = $controller;
-  }));
-
-  it('should be able to create a new controller', function() {
-    var mmmController = $controllerConstructor('mmmController', {$scope: scope});
-    expect(typeof mmmController).toBe('object');
-  });
-
-});
-
-},{"../../app/js/app.js":1,"./../../bower_components/angular-mocks/angular-mocks.js":4}],8:[function(require,module,exports){
-'use strict';
-
-require('../../app/js/app.js');
-require("./../../bower_components/angular-mocks/angular-mocks.js");
-
 describe('Mean Median Mode service', function() {
 
   beforeEach(angular.mock.module('mmmApp'));
@@ -25325,4 +25310,4 @@ describe('Mean Median Mode service', function() {
   //mode in a set that has a mode
   //NO MODE in set that has no mode
 
-},{"../../app/js/app.js":1,"./../../bower_components/angular-mocks/angular-mocks.js":4}]},{},[7,8]);
+},{"../../app/js/app.js":1,"./../../bower_components/angular-mocks/angular-mocks.js":4}]},{},[7]);
