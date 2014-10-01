@@ -1,0 +1,27 @@
+<div>
+  <div class="leftSide">
+  <h1>mean, median, and mode</h1>
+  <h2>...with AngularJS!</h2>
+  <p>Input your numbers as comma separated values and no spaces.</p>
+  <p>Example: 1,1999,5,5,18,0,16,404,16</p>
+
+  <form name="numform">
+    <input type="text" required data-ng-model="currentNums" placeholder="Input your numbers"/>
+    </br>
+    <button data-ng-hide="numform.$invalid" data-ng-click="processNums(currentNums)">Calculate!</button>
+  </form>
+
+</div><!-- closes leftSide -->
+
+<div class="rightSide">
+  <div class="mmmResult">
+    </br>
+      <ul>
+        <li><h2>numbers</h2><div class="yournums">{{currentNums}}</div></li>
+        <li><h2>mean</h2><div class="output">{{meanResult}}</div></li>
+        <li><h2>median</h2><div class="output">{{medianResult}}</div></li>
+        <li><h2>mode</h2><div class="output">{{modeResult}}</div></li>
+      </div><!-- closes output div-->
+    </div><!-- closes your numbers div-->
+  </div>
+</div>
