@@ -1,7 +1,7 @@
 'use strict'
 
 module.exports = function(app) {
-  app.factory('mathService', function($http) { //fixme: what is $http for here?
+  app.factory('mathService', function($http) {
 
     //todo: make a service that parses the string to only be numbers
 
@@ -72,7 +72,7 @@ module.exports = function(app) {
         //the value is how many times that number is found in the array
         for (var i = 0; i < numArray.length; i ++) {
           num = numArray[i];
-          if (modeMap[num] == null) {
+          if (!modeMap[num]) {
             modeMap[num] = 1;
           } else {
             modeMap[num]++;
